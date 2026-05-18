@@ -26,8 +26,8 @@ jobs:
       - name: Build
         uses: sersoft-gmbh/xcodebuild-action@v4
         with:
-          project: iosApp/templateIOS.xcodeproj
-          scheme: templateIOS
+          project: iosApp/HouseChoresIOS.xcodeproj
+          scheme: HouseChoresIOS
           destination: name=iPhone 17
           sdk: iphoneos
           configuration: Debug

@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "template"
+rootProject.name = "House Chores"
 include(":androidApp")
 include(":desktopApp")
 include(":shared")
