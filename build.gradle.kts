@@ -13,7 +13,6 @@ plugins {
 }
 
 apply(from = "buildscripts/githooks.gradle")
-apply(from = "buildscripts/setup.gradle")
 
 subprojects {
     apply(from = "../buildscripts/detekt.gradle")
