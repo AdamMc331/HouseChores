@@ -23,7 +23,7 @@ kotlin {
         compileSdk = libs.versions.compileSdk.get().toInt()
         minSdk = libs.versions.minSdk.get().toInt()
 
-        namespace = "template.shared"
+        namespace = "com.adammncneilly.housechores.shared"
 
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -95,7 +95,7 @@ kotlin {
                             freeCompilerArgs.addAll(
                                 "-P",
                                 "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation" +
-                                    "=template.shared.Parcelize",
+                                    "=com.adammncneilly.housechores.shared.Parcelize",
                             )
                         }
                     }
@@ -107,14 +107,14 @@ kotlin {
 
 compose.resources {
     publicResClass = false
-    packageOfResClass = "template.shared"
+    packageOfResClass = "com.adammncneilly.housechores.shared"
     generateResClass = auto
 }
 
 sqldelight {
     databases {
         create("AppDatabase") {
-            packageName.set("template.shared")
+            packageName.set("com.adammncneilly.housechores.shared")
         }
     }
 }
@@ -122,7 +122,7 @@ sqldelight {
 // NOTE: Replace the template schema.json with the schema for your apollo api.
 apollo {
     service("service") {
-        packageName.set("template.shared")
+        packageName.set("com.adammncneilly.housechores.shared")
     }
 }
 
