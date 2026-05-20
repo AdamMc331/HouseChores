@@ -4,7 +4,6 @@ import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import androidx.navigation3.ui.NavDisplay
@@ -64,27 +63,24 @@ fun AppNavHost() {
             isMediumOrLargerWidth = isMediumOrLargerWidth,
         ),
         entryProvider = { key ->
-            navEntryProvider(key, backStack)
+            navEntryProvider(key)
         },
     )
 }
 
 private fun navEntryProvider(
     key: AppScreen,
-    backStack: SnapshotStateList<AppScreen>,
 ): NavEntry<AppScreen> =
     when (key) {
         is AppScreen.Tab -> {
             homeTabEntry(
                 key = key,
-                backStack = backStack,
             )
         }
     }
 
 private fun homeTabEntry(
     key: AppScreen.Tab,
-    backStack: SnapshotStateList<AppScreen>,
 ): NavEntry<AppScreen> {
     val metadata = if (key.tab.supportsTwoPane) {
         TwoPaneScene.twoPane()
