@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 rootProject.name = "House Chores"
 include(":androidApp")
 include(":desktopApp")
+include(":scaffold")
 include(":shared")
