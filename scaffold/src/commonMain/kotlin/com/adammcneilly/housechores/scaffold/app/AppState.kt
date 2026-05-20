@@ -65,27 +65,28 @@ class AppState(
                     it[0] as HomeTab,
                     it[1] as Boolean,
                 )
-            }
+            },
         )
         val appStateSaver = mapSaver<AppState>(
             save = { appState ->
                 mapOf(
                     "navItems" to appState.navItems.map { navItem ->
-                        with (navItemSaver) {
+                        with(navItemSaver) {
                             save(navItem)
                         }
-                    }
+                    },
                 )
             },
             restore = { map ->
                 val savedNavItems = map["navItems"] as? List<*>
 
-                val navItems = savedNavItems?.mapNotNull {
-                    navItemSaver.restore(it ?: return@mapNotNull null)
-                }.orEmpty()
+                val navItems = savedNavItems
+                    ?.mapNotNull {
+                        navItemSaver.restore(it ?: return@mapNotNull null)
+                    }.orEmpty()
 
                 AppState(initialNavItems = navItems)
-            }
+            },
         )
     }
 }
