@@ -27,6 +27,6 @@ fun FeedScreen(
                 modifier = Modifier
                     .statusBarsPadding(),
             )
-        }
+        },
     )
 }
