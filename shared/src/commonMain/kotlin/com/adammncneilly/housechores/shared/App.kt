@@ -1,64 +1,37 @@
 package com.adammncneilly.housechores.shared
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Button
+import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.adammncneilly.housechores.shared.ui.UiImage
-import com.adammncneilly.housechores.shared.ui.components.ImageWrapper
+import com.adammcneilly.housechores.scaffold.LocalSharedTransitionScope
+import com.adammcneilly.housechores.scaffold.app.AppState
+import com.adammcneilly.housechores.scaffold.app.LocalAppState
+import com.adammncneilly.housechores.shared.navigation.AppNavHost
 import com.adammncneilly.housechores.shared.ui.theme.HCTheme
 
 @Preview
 @Composable
 fun App() {
+    val appState = rememberSaveable(saver = AppState.saver) {
+        AppState()
+    }
+
     HCTheme {
-        var showContent by remember {
-            mutableStateOf(false)
-        }
-
         Surface {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth(),
+            SharedTransitionLayout(
+                modifier = Modifier
+                    .fillMaxSize(),
             ) {
-                Button(
-                    onClick = {
-                        showContent = !showContent
-                    },
+                CompositionLocalProvider(
+                    LocalSharedTransitionScope provides this,
+                    LocalAppState provides appState,
                 ) {
-                    Text(
-                        text = "Click me!",
-                    )
-                }
-
-                AnimatedVisibility(showContent) {
-                    val greeting = remember {
-                        Greeting().greet()
-                    }
-
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                    ) {
-                        ImageWrapper(
-                            image = UiImage.Local(Res.drawable.compose_multiplatform),
-                            contentDescription = null,
-                        )
-                        Text(
-                            text = "Compose: $greeting",
-                        )
-                    }
+                    AppNavHost()
                 }
             }
         }

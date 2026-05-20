@@ -12,11 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.adammcneilly.housechores.scaffold.navigation.components.PersistentNavigationBar
+import com.adammcneilly.housechores.scaffold.navigation.components.PersistentNavigationRail
 
 /**
  * A persistent [androidx.compose.material3.Scaffold] that will render the various slots for any given screen,
- * allowing each screen to hold persistent UI elements such as [com.adammcneilly.spacenerd.shared.navigation.components.PersistentNavigationBar]
- * or [com.adammcneilly.spacenerd.shared.navigation.components.PersistentNavigationRail].
+ * allowing each screen to hold persistent UI elements such as [PersistentNavigationBar]
+ * or [PersistentNavigationRail].
  */
 @Composable
 @Suppress("LongParameterList")

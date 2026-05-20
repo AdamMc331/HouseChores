@@ -1,0 +1,121 @@
+package com.adammncneilly.housechores.shared.navigation
+
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.ui.LocalNavAnimatedContentScope
+import androidx.navigation3.ui.NavDisplay
+import androidx.window.core.layout.WindowSizeClass
+import com.adammcneilly.housechores.scaffold.LocalNavAnimatedVisibilityScope
+import com.adammcneilly.housechores.scaffold.app.LocalAppState
+import com.adammcneilly.housechores.scaffold.navigation.HomeTab
+import com.adammncneilly.housechores.shared.feature.feed.FeedScreen
+
+@Composable
+fun AppNavHost() {
+    val startDestination = AppScreen.Tab(HomeTab.News)
+
+    val backStack = rememberNavBackStack<AppScreen>(
+        startDestination,
+    )
+
+    val appState = LocalAppState.current
+
+    val currentTab = appState.currentSelectedTab
+
+    LaunchedEffect(currentTab) {
+        if (currentTab != null) {
+            val previousTab = (backStack.lastOrNull() as? AppScreen.Tab)?.tab
+            if (previousTab != null) {
+                if (currentTab != previousTab) {
+                    // Before adding this tab, drop everything up to the first tab
+                    while (backStack.lastOrNull() != startDestination) {
+                        backStack.removeLastOrNull()
+                    }
+
+                    // Need to navigate to current tab
+                    backStack.add(AppScreen.Tab(currentTab))
+                }
+            }
+        }
+    }
+
+    val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
+
+    val isMediumOrLargerWidth = windowSizeClass.isWidthAtLeastBreakpoint(
+        widthDpBreakpoint = WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND,
+    )
+
+    NavDisplay(
+        backStack = backStack,
+        onBack = {
+            backStack.removeLastOrNull()
+
+            // If we're navigating back to a home tab, update app state.
+            val newTab = (backStack.lastOrNull() as? AppScreen.Tab)?.tab
+            if (newTab != null) {
+                appState.onNavItemSelected(newTab)
+            }
+        },
+        sceneStrategy = TwoPaneSceneStrategy(
+            isMediumOrLargerWidth = isMediumOrLargerWidth,
+        ),
+        entryProvider = { key ->
+            navEntryProvider(key, backStack)
+        },
+    )
+}
+
+private fun navEntryProvider(
+    key: AppScreen,
+    backStack: SnapshotStateList<AppScreen>,
+): NavEntry<AppScreen> =
+    when (key) {
+        is AppScreen.Tab -> {
+            homeTabEntry(
+                key = key,
+                backStack = backStack,
+            )
+        }
+    }
+
+private fun homeTabEntry(
+    key: AppScreen.Tab,
+    backStack: SnapshotStateList<AppScreen>,
+): NavEntry<AppScreen> {
+    val metadata = if (key.tab.supportsTwoPane) {
+        TwoPaneScene.twoPane()
+    } else {
+        emptyMap()
+    }
+
+    return NavEntry(
+        key = key,
+        metadata = metadata,
+    ) {
+        CompositionLocalProvider(
+            LocalNavAnimatedVisibilityScope provides LocalNavAnimatedContentScope.current,
+        ) {
+            when (key.tab) {
+                HomeTab.News -> {
+                    FeedScreen()
+                }
+
+                HomeTab.Launches -> {
+                    FeedScreen()
+                }
+
+                HomeTab.Astronauts -> {
+                    FeedScreen()
+                }
+
+                HomeTab.Stations -> {
+                    FeedScreen()
+                }
+            }
+        }
+    }
+}
