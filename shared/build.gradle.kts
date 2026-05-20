@@ -87,23 +87,6 @@ kotlin {
             implementation(libs.google.testparameterinjector)
             implementation(libs.koin.test)
         }
-
-        targets.configureEach {
-            val isAndroidTarget = platformType == KotlinPlatformType.androidJvm
-            compilations.configureEach {
-                compileTaskProvider.configure {
-                    compilerOptions {
-                        if (isAndroidTarget) {
-                            freeCompilerArgs.addAll(
-                                "-P",
-                                "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation" +
-                                    "=com.adammncneilly.housechores.shared.Parcelize",
-                            )
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 

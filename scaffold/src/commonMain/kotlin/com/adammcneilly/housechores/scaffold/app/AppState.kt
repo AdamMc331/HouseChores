@@ -2,10 +2,10 @@ package com.adammcneilly.housechores.scaffold.app
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.saveable.mapSaver
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
-import com.adammcneilly.housechores.scaffold.Parcelize
 import com.adammcneilly.housechores.scaffold.navigation.HomeTab
 import com.adammcneilly.housechores.scaffold.navigation.NavItem
 
@@ -19,34 +19,24 @@ val LocalAppState = staticCompositionLocalOf<AppState> {
 }
 
 /**
- * By extracting the parcelable components out of [AppState], this data
- * class can also be parcelable and persisted across configuration changes
- * using rememberSaveable.
+ * The application state container, it's main purpose to expose the
+ * shared business logic like navigation state via [navItems].
  */
-@Parcelize
-data class AppStateData(
-    val navItems: List<NavItem>,
+class AppState(
+    initialNavItems: List<NavItem>,
 ) {
     constructor(
         selectedTab: HomeTab = HomeTab.News,
     ) : this(
-        navItems = HomeTab.entries.map { tab ->
+        initialNavItems = HomeTab.entries.map { tab ->
             NavItem(
                 tab = tab,
                 selected = (tab == selectedTab),
             )
         },
     )
-}
 
-/**
- * The application state container, it's main purpose to expose the
- * shared business logic like navigation state via [navItems].
- */
-class AppState(
-    initialData: AppStateData = AppStateData(),
-) {
-    var navItems: List<NavItem> by mutableStateOf(initialData.navItems)
+    var navItems: List<NavItem> by mutableStateOf(initialNavItems)
         private set
 
     val currentSelectedTab: HomeTab?
@@ -65,24 +55,37 @@ class AppState(
         }
     }
 
-    /**
-     * Convert this class into something that can actually be saved
-     * in rememberSaveable.
-     */
-    fun toSaveableData(): AppStateData {
-        return AppStateData(
-            navItems = navItems,
-        )
-    }
-
     companion object {
-        val saver = Saver<AppState, AppStateData>(
+        private val navItemSaver = listSaver<NavItem, Any>(
+            save = {
+                listOf(it.tab, it.selected)
+            },
+            restore = {
+                NavItem(
+                    it[0] as HomeTab,
+                    it[1] as Boolean,
+                )
+            }
+        )
+        val appStateSaver = mapSaver<AppState>(
             save = { appState ->
-                appState.toSaveableData()
+                mapOf(
+                    "navItems" to appState.navItems.map { navItem ->
+                        with (navItemSaver) {
+                            save(navItem)
+                        }
+                    }
+                )
             },
-            restore = { appStateData ->
-                AppState(appStateData)
-            },
+            restore = { map ->
+                val savedNavItems = map["navItems"] as? List<*>
+
+                val navItems = savedNavItems?.mapNotNull {
+                    navItemSaver.restore(it ?: return@mapNotNull null)
+                }.orEmpty()
+
+                AppState(initialNavItems = navItems)
+            }
         )
     }
 }

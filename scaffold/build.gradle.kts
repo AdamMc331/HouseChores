@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.kotlin.parcelize)
 }
 
 kotlin {
@@ -41,23 +40,6 @@ kotlin {
 
         commonTest.dependencies {
             implementation(kotlin("test"))
-        }
-    }
-
-    targets.configureEach {
-        val isAndroidTarget = platformType == KotlinPlatformType.androidJvm
-        compilations.configureEach {
-            compileTaskProvider.configure {
-                compilerOptions {
-                    if (isAndroidTarget) {
-                        freeCompilerArgs.addAll(
-                            "-P",
-                            "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation" +
-                                "=com.adammncneilly.housechores.scaffold.Parcelize",
-                        )
-                    }
-                }
-            }
         }
     }
 }

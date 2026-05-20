@@ -17,7 +17,7 @@ import com.adammncneilly.housechores.shared.ui.theme.HCTheme
 @Preview
 @Composable
 fun App() {
-    val appState = rememberSaveable(saver = AppState.saver) {
+    val appState = rememberSaveable(saver = AppState.appStateSaver) {
         AppState()
     }
 
