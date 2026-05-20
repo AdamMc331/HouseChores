@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
     alias(libs.plugins.android.kmp.library)
@@ -40,6 +41,23 @@ kotlin {
 
         commonTest.dependencies {
             implementation(kotlin("test"))
+        }
+    }
+
+    targets.configureEach {
+        val isAndroidTarget = platformType == KotlinPlatformType.androidJvm
+        compilations.configureEach {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    if (isAndroidTarget) {
+                        freeCompilerArgs.addAll(
+                            "-P",
+                            "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation" +
+                                "=com.adammncneilly.housechores.scaffold.Parcelize",
+                        )
+                    }
+                }
+            }
         }
     }
 }

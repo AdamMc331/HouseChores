@@ -1,14 +1,13 @@
 package com.adammcneilly.housechores.scaffold.app
 
-import android.os.Parcelable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.adammcneilly.housechores.scaffold.Parcelize
 import com.adammcneilly.housechores.scaffold.navigation.HomeTab
 import com.adammcneilly.housechores.scaffold.navigation.NavItem
-import kotlinx.parcelize.Parcelize
 
 /**
  * A composition local provider for [AppState] allows us to
@@ -27,7 +26,7 @@ val LocalAppState = staticCompositionLocalOf<AppState> {
 @Parcelize
 data class AppStateData(
     val navItems: List<NavItem>,
-) : Parcelable {
+) {
     constructor(
         selectedTab: HomeTab = HomeTab.News,
     ) : this(
