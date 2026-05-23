@@ -26,7 +26,7 @@ class AppState(
     initialNavItems: List<NavItem>,
 ) {
     constructor(
-        selectedTab: HomeTab = HomeTab.News,
+        selectedTab: HomeTab = HomeTab.Feed,
     ) : this(
         initialNavItems = HomeTab.entries.map { tab ->
             NavItem(

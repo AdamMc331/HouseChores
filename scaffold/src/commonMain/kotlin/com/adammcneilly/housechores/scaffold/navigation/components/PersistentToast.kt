@@ -1,4 +1,4 @@
-package com.adammcneilly.housechores.scaffold
+package com.adammcneilly.housechores.scaffold.navigation.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.adammcneilly.housechores.scaffold.ScaffoldState
 
 @Composable
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -25,7 +26,13 @@ fun ScaffoldState.PersistentToast(
     exitTransition: ExitTransition = slideOutVertically(targetOffsetY = { it }),
 ) {
     AnimatedVisibility(
-        modifier = modifier,
+        modifier = modifier
+            .sharedElement(
+                sharedContentState = rememberSharedContentState(
+                    ToastSharedElementKey,
+                ),
+                animatedVisibilityScope = this,
+            ),
         visible = message != null,
         enter = enterTransition,
         exit = exitTransition,
@@ -49,3 +56,5 @@ fun ScaffoldState.PersistentToast(
         },
     )
 }
+
+private data object ToastSharedElementKey
