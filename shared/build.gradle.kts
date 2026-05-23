@@ -32,7 +32,6 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -46,15 +45,18 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(":scaffold"))
             implementation(libs.androidx.datastore.preferences)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.androidx.navigation3.ui.kmp)
             implementation(libs.apollo.runtime)
             implementation(libs.cash.sqldelight.coroutines)
             implementation(libs.cash.sqldelight.runtime)
             implementation(libs.coil.compose)
             implementation(libs.coil.ktor)
             implementation(libs.compose.material3.adaptive)
+            implementation(libs.jetbrains.compose.animation)
             implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.foundation)
             implementation(libs.jetbrains.compose.material.icons.extended)
@@ -84,23 +86,6 @@ kotlin {
             implementation(kotlin("test"))
             implementation(libs.google.testparameterinjector)
             implementation(libs.koin.test)
-        }
-
-        targets.configureEach {
-            val isAndroidTarget = platformType == KotlinPlatformType.androidJvm
-            compilations.configureEach {
-                compileTaskProvider.configure {
-                    compilerOptions {
-                        if (isAndroidTarget) {
-                            freeCompilerArgs.addAll(
-                                "-P",
-                                "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation" +
-                                    "=com.adammncneilly.housechores.shared.Parcelize",
-                            )
-                        }
-                    }
-                }
-            }
         }
     }
 }
