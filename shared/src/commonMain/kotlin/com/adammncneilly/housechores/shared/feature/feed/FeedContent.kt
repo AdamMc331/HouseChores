@@ -1,0 +1,16 @@
+package com.adammncneilly.housechores.shared.feature.feed
+
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+
+@Composable
+fun FeedContent(
+    state: FeedUiState,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = "Feed Content",
+        modifier = modifier,
+    )
+}
