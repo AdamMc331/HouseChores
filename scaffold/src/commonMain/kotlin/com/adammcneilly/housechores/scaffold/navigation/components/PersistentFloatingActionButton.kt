@@ -7,8 +7,10 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import com.adammcneilly.housechores.scaffold.ScaffoldState
 
 @Composable
@@ -21,6 +23,8 @@ fun ScaffoldState.PersistentFloatingActionButton(
     modifier: Modifier = Modifier,
     enterTransition: EnterTransition = slideInVertically(initialOffsetY = { it }),
     exitTransition: ExitTransition = slideOutVertically(targetOffsetY = { it }),
+    shape: Shape = FloatingActionButtonDefaults.extendedFabShape,
+    expanded: Boolean = true,
 ) {
     AnimatedVisibility(
         modifier = modifier
@@ -38,6 +42,8 @@ fun ScaffoldState.PersistentFloatingActionButton(
                 text = text,
                 icon = icon,
                 onClick = onClick,
+                shape = shape,
+                expanded = expanded,
             )
         },
     )
