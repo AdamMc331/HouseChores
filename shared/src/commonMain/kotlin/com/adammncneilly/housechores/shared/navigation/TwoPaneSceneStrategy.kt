@@ -1,6 +1,7 @@
 package com.adammncneilly.housechores.shared.navigation
 
 import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.scene.Scene
 import androidx.navigation3.scene.SceneStrategy
 import androidx.navigation3.scene.SceneStrategyScope
@@ -11,11 +12,11 @@ import androidx.navigation3.scene.SceneStrategyScope
  */
 class TwoPaneSceneStrategy(
     private val isMediumOrLargerWidth: Boolean,
-) : SceneStrategy<AppScreen> {
+) : SceneStrategy<NavKey> {
     @Suppress("ReturnCount")
-    override fun SceneStrategyScope<AppScreen>.calculateScene(
-        entries: List<NavEntry<AppScreen>>,
-    ): Scene<AppScreen>? {
+    override fun SceneStrategyScope<NavKey>.calculateScene(
+        entries: List<NavEntry<NavKey>>,
+    ): Scene<NavKey>? {
         if (!isMediumOrLargerWidth) {
             return null
         }

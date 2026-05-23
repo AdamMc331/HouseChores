@@ -5,19 +5,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import androidx.navigation3.ui.NavDisplay
+import androidx.savedstate.serialization.SavedStateConfiguration
 import androidx.window.core.layout.WindowSizeClass
 import com.adammcneilly.housechores.scaffold.LocalNavAnimatedVisibilityScope
 import com.adammcneilly.housechores.scaffold.app.LocalAppState
 import com.adammcneilly.housechores.scaffold.navigation.HomeTab
 import com.adammncneilly.housechores.shared.feature.feed.FeedScreen
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
+
+private val config = SavedStateConfiguration {
+    serializersModule = SerializersModule {
+        polymorphic(NavKey::class) {
+            subclass(AppScreen.Tab::class, AppScreen.Tab.serializer())
+        }
+    }
+}
 
 @Composable
 fun AppNavHost() {
     val startDestination = AppScreen.Tab(HomeTab.News)
 
-    val backStack = rememberNavBackStack<AppScreen>(
+    val backStack = rememberNavBackStack(
+        config,
         startDestination,
     )
 
@@ -69,19 +83,20 @@ fun AppNavHost() {
 }
 
 private fun navEntryProvider(
-    key: AppScreen,
-): NavEntry<AppScreen> =
-    when (key) {
+    key: NavKey,
+): NavEntry<NavKey> {
+    return when (val screen = key as AppScreen) {
         is AppScreen.Tab -> {
             homeTabEntry(
-                key = key,
+                key = screen,
             )
         }
     }
+}
 
 private fun homeTabEntry(
     key: AppScreen.Tab,
-): NavEntry<AppScreen> {
+): NavEntry<NavKey> {
     val metadata = if (key.tab.supportsTwoPane) {
         TwoPaneScene.twoPane()
     } else {
