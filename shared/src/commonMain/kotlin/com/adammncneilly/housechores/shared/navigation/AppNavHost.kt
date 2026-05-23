@@ -29,7 +29,7 @@ private val config = SavedStateConfiguration {
 
 @Composable
 fun AppNavHost() {
-    val startDestination = AppScreen.Tab(HomeTab.News)
+    val startDestination = AppScreen.Tab(HomeTab.Feed)
 
     val backStack = rememberNavBackStack(
         config,
@@ -115,19 +115,15 @@ private fun homeTabEntry(
             LocalNavAnimatedVisibilityScope provides LocalNavAnimatedContentScope.current,
         ) {
             when (key.tab) {
-                HomeTab.News -> {
+                HomeTab.Feed -> {
                     FeedScreen()
                 }
 
-                HomeTab.Launches -> {
+                HomeTab.Archive -> {
                     FeedScreen()
                 }
 
-                HomeTab.Astronauts -> {
-                    FeedScreen()
-                }
-
-                HomeTab.Stations -> {
+                HomeTab.Settings -> {
                     FeedScreen()
                 }
             }

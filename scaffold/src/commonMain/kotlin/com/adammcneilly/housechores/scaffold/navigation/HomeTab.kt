@@ -1,10 +1,14 @@
 package com.adammcneilly.housechores.scaffold.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Feed
+import androidx.compose.material.icons.filled.Feed
 import androidx.compose.material.icons.filled.Groups
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.RocketLaunch
 import androidx.compose.material.icons.filled.SatelliteAlt
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 /**
@@ -15,24 +19,19 @@ enum class HomeTab(
     val icon: ImageVector,
     val supportsTwoPane: Boolean,
 ) {
-    News(
-        label = "News",
-        icon = Icons.Default.Newspaper,
+    Feed(
+        label = "Feed",
+        icon = Icons.AutoMirrored.Filled.Feed,
         supportsTwoPane = false,
     ),
-    Launches(
-        label = "Launches",
-        icon = Icons.Default.RocketLaunch,
-        supportsTwoPane = true,
+    Archive(
+        label = "Archive",
+        icon = Icons.Default.History,
+        supportsTwoPane = false,
     ),
-    Astronauts(
-        label = "Astronauts",
-        icon = Icons.Default.Groups,
-        supportsTwoPane = true,
-    ),
-    Stations(
-        label = "Stations",
-        icon = Icons.Default.SatelliteAlt,
-        supportsTwoPane = true,
+    Settings(
+        label = "Settings",
+        icon = Icons.Default.Settings,
+        supportsTwoPane = false,
     ),
 }
