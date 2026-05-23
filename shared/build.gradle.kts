@@ -32,7 +32,6 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -57,6 +56,7 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.ktor)
             implementation(libs.compose.material3.adaptive)
+            implementation(libs.jetbrains.compose.animation)
             implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.foundation)
             implementation(libs.jetbrains.compose.material.icons.extended)

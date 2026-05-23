@@ -7,6 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.scene.SinglePaneSceneStrategy
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
@@ -73,8 +74,11 @@ fun AppNavHost() {
                 appState.onNavItemSelected(newTab)
             }
         },
-        sceneStrategy = TwoPaneSceneStrategy(
-            isMediumOrLargerWidth = isMediumOrLargerWidth,
+        sceneStrategies = listOf(
+            SinglePaneSceneStrategy(),
+            TwoPaneSceneStrategy(
+                isMediumOrLargerWidth = isMediumOrLargerWidth,
+            ),
         ),
         entryProvider = { key ->
             navEntryProvider(key)

@@ -23,7 +23,6 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     )
@@ -33,6 +32,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.compose.material3.adaptive)
+            implementation(libs.jetbrains.compose.animation)
             implementation(libs.jetbrains.compose.material3)
             implementation(libs.jetbrains.compose.material.icons.extended)
             implementation(libs.jetbrains.compose.ui)

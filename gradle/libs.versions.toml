@@ -25,7 +25,7 @@ material = "1.14.0"
 materialIconsExtended = "1.7.3"
 material3Adaptive = "1.2.0"
 minSdk = "23"
-nav3Kmp = "1.0.0-alpha06"
+nav3Kmp = "1.1.1"
 sqldelight = "2.3.2"
 testParameterInjector = "1.22"
 
@@ -51,6 +51,7 @@ compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-test-junit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 google-testparameterinjector = { module = "com.google.testparameterinjector:test-parameter-injector", version.ref = "testParameterInjector" }
+jetbrains-compose-animation = { module = "org.jetbrains.compose.animation:animation", version.ref = "kmpCompose" }
 jetbrains-compose-components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "kmpCompose" }
 jetbrains-compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "kmpCompose" }
 jetbrains-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "kmpComposeMaterial3" }
