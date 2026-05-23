@@ -15,6 +15,7 @@ class SettingsViewModel : ViewModel() {
     private val mutableState = MutableStateFlow(SettingsUiState())
     val state = mutableState.asStateFlow()
 
+    @Suppress("UnusedParameter")
     fun onEvent(
         event: SettingsUiEvent,
     ) {

@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
+@Suppress("UnusedParameter")
 fun SettingsContent(
     state: SettingsUiState,
     modifier: Modifier = Modifier,

@@ -15,6 +15,7 @@ class ArchiveViewModel : ViewModel() {
     private val mutableState = MutableStateFlow(ArchiveUiState())
     val state = mutableState.asStateFlow()
 
+    @Suppress("UnusedParameter")
     fun onEvent(
         event: ArchiveUiEvent,
     ) {

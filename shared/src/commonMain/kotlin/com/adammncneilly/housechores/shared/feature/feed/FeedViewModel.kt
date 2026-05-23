@@ -15,6 +15,7 @@ class FeedViewModel : ViewModel() {
     private val mutableState = MutableStateFlow(FeedUiState())
     val state = mutableState.asStateFlow()
 
+    @Suppress("UnusedParameter")
     fun onEvent(
         event: FeedUiEvent,
     ) {
