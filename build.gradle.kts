@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.google.devtools.ksp).apply(false)
     alias(libs.plugins.kotlin.multiplatform).apply(false)
     alias(libs.plugins.kotlinter).apply(false)
+    alias(libs.plugins.zac.sweers.metro).apply(false)
 }
 
 apply(from = "buildscripts/githooks.gradle")

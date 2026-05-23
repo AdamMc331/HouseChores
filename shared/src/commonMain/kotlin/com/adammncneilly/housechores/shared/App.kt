@@ -11,8 +11,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.adammcneilly.housechores.scaffold.LocalSharedTransitionScope
 import com.adammcneilly.housechores.scaffold.app.AppState
 import com.adammcneilly.housechores.scaffold.app.LocalAppState
+import com.adammncneilly.housechores.shared.di.AppGraph
 import com.adammncneilly.housechores.shared.navigation.AppNavHost
 import com.adammncneilly.housechores.shared.ui.theme.HCTheme
+import dev.zacsweers.metro.createGraph
+import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
 
 @Preview
 @Composable
@@ -20,6 +23,8 @@ fun App() {
     val appState = rememberSaveable(saver = AppState.appStateSaver) {
         AppState()
     }
+
+    val appGraph = createGraph<AppGraph>()
 
     HCTheme {
         Surface {
@@ -30,6 +35,7 @@ fun App() {
                 CompositionLocalProvider(
                     LocalSharedTransitionScope provides this,
                     LocalAppState provides appState,
+                    LocalMetroViewModelFactory provides appGraph.metroVmf,
                 ) {
                     AppNavHost()
                 }
