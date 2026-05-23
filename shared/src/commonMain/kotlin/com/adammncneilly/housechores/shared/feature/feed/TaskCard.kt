@@ -56,6 +56,7 @@ fun TaskCard(
 @PreviewLightDark
 @PreviewFontScale
 @PreviewDynamicColors
+@Suppress("UnusedPrivateMember")
 private fun TaskCardPreview() {
     val task = TaskDisplayModel(
         id = "123",
