@@ -1,4 +1,4 @@
-package com.adammncneilly.housechores.shared.feature.feed
+package com.adammncneilly.housechores.shared.feature.settings
 
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Text
@@ -12,9 +12,9 @@ import com.adammcneilly.housechores.scaffold.rememberScaffoldState
 import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 @Composable
-fun FeedScreen(
+fun SettingsScreen(
     modifier: Modifier = Modifier,
-    viewModel: FeedViewModel = metroViewModel(),
+    viewModel: SettingsViewModel = metroViewModel(),
 ) {
     rememberScaffoldState().PersistentScaffold(
         modifier = modifier,
@@ -27,7 +27,7 @@ fun FeedScreen(
         content = {
             val state = viewModel.state.collectAsState()
 
-            FeedContent(
+            SettingsContent(
                 state = state.value,
                 modifier = Modifier
                     .statusBarsPadding(),

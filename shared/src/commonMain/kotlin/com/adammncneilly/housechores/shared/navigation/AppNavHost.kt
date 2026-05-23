@@ -15,7 +15,9 @@ import androidx.window.core.layout.WindowSizeClass
 import com.adammcneilly.housechores.scaffold.LocalNavAnimatedVisibilityScope
 import com.adammcneilly.housechores.scaffold.app.LocalAppState
 import com.adammcneilly.housechores.scaffold.navigation.HomeTab
+import com.adammncneilly.housechores.shared.feature.archive.ArchiveScreen
 import com.adammncneilly.housechores.shared.feature.feed.FeedScreen
+import com.adammncneilly.housechores.shared.feature.settings.SettingsScreen
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 
@@ -120,11 +122,11 @@ private fun homeTabEntry(
                 }
 
                 HomeTab.Archive -> {
-                    FeedScreen()
+                    ArchiveScreen()
                 }
 
                 HomeTab.Settings -> {
-                    FeedScreen()
+                    SettingsScreen()
                 }
             }
         }
