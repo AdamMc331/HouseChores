@@ -42,7 +42,9 @@ fun FeedScreen(
                         contentDescription = null,
                     )
                 },
-                onClick = {},
+                onClick = {
+                    viewModel.onEvent(FeedUiEvent.AddTaskClicked)
+                },
                 shape = CircleShape,
                 expanded = true,
             )
