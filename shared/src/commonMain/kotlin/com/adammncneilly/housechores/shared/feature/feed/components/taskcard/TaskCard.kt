@@ -1,4 +1,4 @@
-package com.adammncneilly.housechores.shared.designsystem.components.taskcard
+package com.adammncneilly.housechores.shared.feature.feed.components.taskcard
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +24,7 @@ fun TaskCard(
 ) {
     Card(
         modifier = modifier,
+        shape = MaterialTheme.shapes.large,
     ) {
         Column(
             modifier = Modifier
