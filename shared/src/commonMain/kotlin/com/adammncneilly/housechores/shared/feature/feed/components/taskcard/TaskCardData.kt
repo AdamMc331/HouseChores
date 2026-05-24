@@ -7,17 +7,8 @@ data class TaskCardData(
     val title: String,
     val actions: List<Action>,
 ) {
-    constructor(task: TaskDisplayModel) : this(
-        title = task.title,
-        actions = when (task.status) {
-        },
-    )
-
     data class Action(
         val label: String,
         val onClick: () -> Unit,
     )
-}
-
-private fun actionsForStatus(status: TaskStatus): List<TaskCardData.Action> {
 }
