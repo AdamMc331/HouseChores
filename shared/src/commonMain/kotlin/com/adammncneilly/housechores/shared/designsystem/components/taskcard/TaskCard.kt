@@ -1,4 +1,4 @@
-package com.adammncneilly.housechores.shared.feature.feed
+package com.adammncneilly.housechores.shared.designsystem.components.taskcard
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,18 +15,7 @@ import androidx.compose.ui.tooling.preview.PreviewDynamicColors
 import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.adammncneilly.housechores.shared.displaymodels.TaskDisplayModel
 import com.adammncneilly.housechores.shared.ui.theme.HCTheme
-
-data class TaskCardData(
-    val title: String,
-    val actions: List<Action>,
-) {
-    data class Action(
-        val label: String,
-        val onClick: () -> Unit,
-    )
-}
 
 @Composable
 fun TaskCard(
