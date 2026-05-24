@@ -60,7 +60,6 @@ fun TaskCard(
 @PreviewLightDark
 @PreviewFontScale
 @PreviewDynamicColors
-@Suppress("UnusedPrivateMember")
 private fun TaskCardPreview() {
     val data = TaskCardData(
         title = "Clean Washing Machine",
