@@ -13,3 +13,9 @@ naming:
   MatchingDeclarationName:
     active: true
     excludes: ['**/androidMain/**', '**/iosMain/**', '**/desktopMain/**']
+
+style:
+  active: true
+  UnusedPrivateMember:
+    active: true
+    ignoreAnnotated: ['PreviewLightDark']

@@ -54,6 +54,7 @@ fun FeedScreen(
 
             FeedContent(
                 state = state.value,
+                onEvent = viewModel::onEvent,
                 modifier = Modifier
                     .statusBarsPadding(),
             )
