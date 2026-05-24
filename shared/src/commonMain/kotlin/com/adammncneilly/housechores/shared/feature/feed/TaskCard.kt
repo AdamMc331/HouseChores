@@ -16,10 +16,21 @@ import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.adammncneilly.housechores.shared.displaymodels.TaskDisplayModel
+import com.adammncneilly.housechores.shared.ui.theme.HCTheme
+
+data class TaskCardData(
+    val title: String,
+    val actions: List<Action>,
+) {
+    data class Action(
+        val label: String,
+        val onClick: () -> Unit,
+    )
+}
 
 @Composable
 fun TaskCard(
-    task: TaskDisplayModel,
+    data: TaskCardData,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -31,21 +42,25 @@ fun TaskCard(
                 .padding(16.dp),
         ) {
             Text(
-                text = task.title,
+                text = data.title,
                 style = MaterialTheme.typography.titleMedium,
             )
 
-            Row(
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .padding(top = 16.dp),
-            ) {
-                TextButton(
-                    onClick = {},
+            if (data.actions.isNotEmpty()) {
+                Row(
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .padding(top = 16.dp),
                 ) {
-                    Text(
-                        text = "Complete",
-                    )
+                    for (action in data.actions) {
+                        TextButton(
+                            onClick = action.onClick,
+                        ) {
+                            Text(
+                                text = action.label,
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -58,14 +73,21 @@ fun TaskCard(
 @PreviewDynamicColors
 @Suppress("UnusedPrivateMember")
 private fun TaskCardPreview() {
-    val task = TaskDisplayModel(
-        id = "123",
+    val data = TaskCardData(
         title = "Clean Washing Machine",
+        actions = listOf(
+            TaskCardData.Action(
+                label = "Done",
+                onClick = {},
+            ),
+        ),
     )
 
-    TaskCard(
-        task = task,
-        modifier = Modifier
-            .fillMaxWidth(),
-    )
+    HCTheme {
+        TaskCard(
+            data = data,
+            modifier = Modifier
+                .fillMaxWidth(),
+        )
+    }
 }
