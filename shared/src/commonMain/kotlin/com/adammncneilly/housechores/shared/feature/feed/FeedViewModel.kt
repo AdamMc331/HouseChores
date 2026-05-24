@@ -7,6 +7,7 @@ import dev.zacsweers.metro.Inject
 import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 @Inject
 @ViewModelKey
@@ -22,6 +23,18 @@ class FeedViewModel : ViewModel() {
             FeedUiEvent.AddTaskClicked -> {
                 // Coming soon
             }
+
+            is FeedUiEvent.ChoreGroupClicked -> {
+                updateChoreGroup(event)
+            }
+        }
+    }
+
+    private fun updateChoreGroup(event: FeedUiEvent.ChoreGroupClicked) {
+        mutableState.update { currentState ->
+            currentState.copy(
+                selectedChoreGroup = event.group,
+            )
         }
     }
 }
