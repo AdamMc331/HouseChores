@@ -11,7 +11,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewDynamicColors
 import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -46,7 +45,7 @@ fun FeedContent(
             )
         }
 
-        state.upcomingTaskGroups.entries.forEach { (title, items) ->
+        state.taskGroups.entries.forEach { (title, items) ->
             item {
                 Text(
                     text = title,
@@ -74,7 +73,6 @@ fun FeedContent(
 @Composable
 @PreviewLightDark
 @PreviewFontScale
-@PreviewDynamicColors
 private fun FeedContentPreview() {
     val tasks = mapOf(
         "Today" to List(2) { index ->
@@ -100,7 +98,7 @@ private fun FeedContentPreview() {
     )
 
     val state = FeedUiState(
-        upcomingTaskGroups = tasks,
+        taskGroups = tasks,
     )
 
     HCTheme {
