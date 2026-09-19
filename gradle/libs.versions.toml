@@ -27,7 +27,7 @@ material3Adaptive = "1.2.0"
 metro = "1.4.4"
 minSdk = "23"
 nav3Kmp = "1.1.1"
-sqldelight = "2.3.2"
+sqldelight = "2.4.0"
 testParameterInjector = "1.23"
 
 [libraries]
