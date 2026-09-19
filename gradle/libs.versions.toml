@@ -28,7 +28,7 @@ metro = "1.4.4"
 minSdk = "23"
 nav3Kmp = "1.1.1"
 sqldelight = "2.3.2"
-testParameterInjector = "1.22"
+testParameterInjector = "1.23"
 
 [libraries]
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
