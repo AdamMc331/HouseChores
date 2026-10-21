@@ -1,4 +1,4 @@
-package com.adammncneilly.housechores.shared.designsystem.components.taskcard
+package com.adammncneilly.housechores.shared.feature.feed.components.taskcard
 
 data class TaskCardData(
     val title: String,
